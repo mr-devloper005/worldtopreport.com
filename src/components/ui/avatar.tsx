@@ -21,17 +21,9 @@ function Avatar({
   )
 }
 
-function AvatarImage({
-  className,
-  ...props
-}: React.ComponentProps<typeof AvatarPrimitive.Image>) {
-  return (
-    <AvatarPrimitive.Image
-      data-slot="avatar-image"
-      className={cn('aspect-square size-full', className)}
-      {...props}
-    />
-  )
+function AvatarImage(_props: React.ComponentProps<typeof AvatarPrimitive.Image>) {
+  // No remote/local avatar images in the UI — initials fallback only.
+  return null
 }
 
 function AvatarFallback({

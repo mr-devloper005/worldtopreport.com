@@ -1,9 +1,9 @@
 export const siteTaskDefinitions = [
   {
     key: 'mediaDistribution',
-    label: 'Updates',
+    label: 'Media',
     route: '/updates',
-    description: 'Recent posts and newsroom updates.',
+    description: 'Published guest posts and media placements.',
     contentType: 'mediaDistribution',
     enabled: true,
   },

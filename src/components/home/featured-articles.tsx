@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -46,19 +45,10 @@ export function FeaturedArticles() {
               href={`/articles/${hero.slug}`}
               className="group relative overflow-hidden rounded-3xl border border-border bg-card"
             >
-              <div className="relative aspect-[16/9] overflow-hidden">
-                <Image
-                  src={hero.coverImage || '/placeholder.svg?height=720&width=1280'}
-                  alt={hero.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                <Badge className="absolute left-6 top-6 bg-background/90 text-foreground">
+              <div className="space-y-3 p-6">
+                <Badge variant="secondary" className="w-fit">
                   {hero.category}
                 </Badge>
-              </div>
-              <div className="space-y-3 p-6">
                 <h3 className="text-2xl font-semibold text-foreground sm:text-3xl">
                   {hero.title}
                 </h3>
@@ -90,14 +80,8 @@ export function FeaturedArticles() {
                   <span>{hero.commentsCount.toLocaleString()} comments</span>
                 </div>
                 <div className="flex flex-wrap items-center gap-3 rounded-xl border border-border bg-muted/40 p-3">
-                  <div className="h-10 w-10 overflow-hidden rounded-full border border-border">
-                    <Image
-                      src={hero.author.avatar}
-                      alt={hero.author.name}
-                      width={40}
-                      height={40}
-                      className="h-full w-full object-cover"
-                    />
+                  <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-muted text-sm font-semibold text-muted-foreground" aria-hidden>
+                    {hero.author.name.charAt(0)}
                   </div>
                   <div className="text-xs text-muted-foreground">
                     <span className="font-medium text-foreground">{hero.author.name}</span>
@@ -131,14 +115,6 @@ export function FeaturedArticles() {
                 href={`/articles/${article!.slug}`}
                 className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card"
               >
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={article!.coverImage || '/placeholder.svg?height=640&width=960'}
-                    alt={article!.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                  />
-                </div>
                 <div className="space-y-2 p-5">
                   <Badge variant="secondary" className="w-fit">
                     {article!.category}

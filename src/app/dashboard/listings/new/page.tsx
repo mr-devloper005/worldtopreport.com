@@ -477,11 +477,10 @@ export default function NewListingPage() {
                       key={i}
                       className="relative aspect-square rounded-lg overflow-hidden bg-muted"
                     >
-                      <img
-                        src={img}
-                        alt={`Business photo ${i + 1}`}
-                        className="w-full h-full object-cover"
-                      />
+                      <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-muted to-muted/70 p-2 text-center text-xs text-muted-foreground">
+                        <span className="font-medium">Photo {i + 1}</span>
+                        <span className="mt-1 line-clamp-2">Preview hidden</span>
+                      </div>
                       <Button
                         variant="destructive"
                         size="icon"

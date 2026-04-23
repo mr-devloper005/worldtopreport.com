@@ -4,17 +4,8 @@ import { cn } from '@/lib/utils'
 
 export function ArticleCardSkeleton({ featured = false }: { featured?: boolean }) {
   return (
-    <Card className={cn(
-      'overflow-hidden border-border bg-card',
-      featured && 'md:flex'
-    )}>
-      <div className={cn(
-        'relative overflow-hidden',
-        featured ? 'aspect-video md:aspect-auto md:w-1/2' : 'aspect-video'
-      )}>
-        <Skeleton className="h-full w-full" />
-      </div>
-      <CardContent className={cn('p-5', featured && 'md:w-1/2 md:p-8')}>
+    <Card className="overflow-hidden border-border bg-card">
+      <CardContent className={cn('p-5', featured && 'sm:p-7')}>
         <div className="mb-3 flex items-center gap-2">
           <Skeleton className="h-5 w-16 rounded-full" />
           <Skeleton className="h-4 w-20" />
@@ -41,9 +32,6 @@ export function ArticleCardSkeleton({ featured = false }: { featured?: boolean }
 export function ListingCardSkeleton() {
   return (
     <Card className="overflow-hidden border-border bg-card">
-      <div className="relative aspect-[4/3] overflow-hidden">
-        <Skeleton className="h-full w-full" />
-      </div>
       <CardContent className="p-4">
         <div className="mb-2 flex items-center justify-between">
           <Skeleton className="h-5 w-16 rounded-full" />
@@ -66,9 +54,6 @@ export function ListingCardSkeleton() {
 export function ClassifiedAdCardSkeleton() {
   return (
     <Card className="overflow-hidden border-border bg-card">
-      <div className="relative aspect-square overflow-hidden">
-        <Skeleton className="h-full w-full" />
-      </div>
       <CardContent className="p-4">
         <div className="mb-2 flex items-center gap-2">
           <Skeleton className="h-5 w-16 rounded-full" />

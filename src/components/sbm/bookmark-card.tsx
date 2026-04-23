@@ -1,10 +1,9 @@
 ﻿'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, ArrowUp, Bookmark, MessageSquare, Share2, Clock, Check } from 'lucide-react'
+import { ArrowUp, Bookmark, MessageSquare, Share2, Clock, Check } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -90,65 +89,50 @@ export function BookmarkCard({
   return (
     <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }}>
       <Card className="group h-full overflow-hidden border-border bg-card transition-all hover:border-muted-foreground/20">
-        <Link href={`/sbm/${bookmark.slug}`} className="block">
-          <div className={cn('relative overflow-hidden', compact ? 'aspect-[4/3]' : 'aspect-[16/9]')}>
-            <Image
-              src={bookmark.image}
-              alt={bookmark.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-            <div className="absolute left-3 top-3 flex items-center gap-2">
-              <Badge className="bg-background/90 text-foreground">
-                {bookmark.category}
-              </Badge>
-              <Badge variant="secondary" className="bg-black/60 text-white">
-                {bookmark.domain}
-              </Badge>
-            </div>
-            <div className="absolute bottom-3 left-3 flex items-center gap-2 text-xs text-white">
-              <Clock className="h-3 w-3" />
-              <span suppressHydrationWarning>
+        <CardContent className={cn('p-5', compact && 'p-4')}>
+          <Link href={`/sbm/${bookmark.slug}`} className="block rounded-md outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring">
+            <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge variant="secondary" className="text-xs">
+                  {bookmark.category}
+                </Badge>
+                <Badge variant="outline" className="text-xs">
+                  {bookmark.domain}
+                </Badge>
+              </div>
+              <span className="inline-flex items-center gap-1 text-xs text-muted-foreground" suppressHydrationWarning>
+                <Clock className="h-3 w-3 shrink-0" aria-hidden />
                 {mounted ? formatDistanceToNow(new Date(bookmark.createdAt), { addSuffix: true }) : 'Just now'}
               </span>
             </div>
-            <div className="absolute bottom-3 right-3 flex items-center gap-2 text-xs text-white">
-              <ArrowUpRight className="h-4 w-4" />
-              <span>Open</span>
-            </div>
-          </div>
-        </Link>
 
-        <CardContent className={cn('p-5', compact && 'p-4')}>
-          <div className="mb-3 flex items-center gap-2">
-            <Avatar className={cn('h-7 w-7', compact && 'h-6 w-6')}>
-              <AvatarImage src={author.avatar} alt={author.name} />
-              <AvatarFallback>{author.name.charAt(0)}</AvatarFallback>
-            </Avatar>
-            <div className="text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">{author.name}</span>
-              <span className="mx-2">•</span>
-              <span>{bookmark.domain}</span>
+            <div className="mb-3 flex items-center gap-2">
+              <Avatar className={cn('h-7 w-7', compact && 'h-6 w-6')}>
+                <AvatarImage src={author.avatar} alt={author.name} />
+                <AvatarFallback>{author.name.charAt(0)}</AvatarFallback>
+              </Avatar>
+              <div className="text-sm text-muted-foreground">
+                <span className="font-medium text-foreground">{author.name}</span>
+                <span className="mx-2">•</span>
+                <span>{bookmark.domain}</span>
+              </div>
             </div>
-          </div>
 
-          <Link href={`/sbm/${bookmark.slug}`}>
             <h3 className={cn('mb-2 font-semibold leading-tight text-foreground', compact ? 'text-base' : 'text-lg')}>
               {bookmark.title}
             </h3>
-          </Link>
-          <p className={cn('mb-4 text-sm text-muted-foreground', compact ? 'line-clamp-2' : 'line-clamp-3')}>
-            {bookmark.description}
-          </p>
+            <p className={cn('mb-4 text-sm text-muted-foreground', compact ? 'line-clamp-2' : 'line-clamp-3')}>
+              {bookmark.description}
+            </p>
 
-          <div className="flex flex-wrap gap-2">
-            {bookmark.tags.slice(0, compact ? 2 : 4).map((tag) => (
-              <Badge key={tag} variant="outline" className="text-xs">
-                {tag}
-              </Badge>
-            ))}
-          </div>
+            <div className="flex flex-wrap gap-2">
+              {bookmark.tags.slice(0, compact ? 2 : 4).map((tag) => (
+                <Badge key={tag} variant="outline" className="text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </Link>
 
           {showActions && (
             <div className="mt-4 flex flex-wrap items-center gap-2">

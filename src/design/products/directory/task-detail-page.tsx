@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, Globe, Mail, MapPin, Phone, ShieldCheck, Tag } from 'lucide-react'
-import { ContentImage } from '@/components/shared/content-image'
+import { ArrowRight, FileText, Globe, Mail, MapPin, Phone, ShieldCheck, Tag } from 'lucide-react'
 import { SchemaJsonLd } from '@/components/seo/schema-jsonld'
 import { TaskPostCard } from '@/components/shared/task-post-card'
 import type { SitePost } from '@/lib/site-connector'
@@ -38,7 +37,6 @@ export function DirectoryTaskDetailPage({
     '@type': task === 'profile' ? 'Organization' : 'LocalBusiness',
     name: post.title,
     description,
-    image: images[0],
     url: `${taskRoute}/${post.slug}`,
     address: location || undefined,
     telephone: phone || undefined,
@@ -56,18 +54,9 @@ export function DirectoryTaskDetailPage({
         <section className="grid gap-8 lg:grid-cols-[1.02fr_0.98fr] lg:items-start">
           <div>
             <div className="overflow-hidden rounded-[2.2rem] border border-slate-200 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.08)]">
-              <div className="relative h-[420px] overflow-hidden bg-slate-100">
-                <ContentImage src={images[0]} alt={post.title} fill className="object-cover" />
+              <div className="flex h-[320px] items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200/70 lg:h-[420px]">
+                <FileText className="h-16 w-16 text-slate-400" aria-hidden />
               </div>
-              {images.length > 1 ? (
-                <div className="grid grid-cols-4 gap-3 p-4">
-                  {images.slice(1, 5).map((image) => (
-                    <div key={image} className="relative h-24 overflow-hidden rounded-2xl border border-slate-200 bg-slate-50">
-                      <ContentImage src={image} alt={post.title} fill className="object-cover" />
-                    </div>
-                  ))}
-                </div>
-              ) : null}
             </div>
 
             <div className="mt-8 rounded-[2rem] border border-slate-200 bg-white p-7 shadow-[0_20px_60px_rgba(15,23,42,0.06)]">
