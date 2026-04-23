@@ -1,7 +1,6 @@
 ﻿'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import { PageShell } from '@/components/shared/page-shell'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -82,16 +81,11 @@ export default function PressPage() {
           <DialogHeader>
             <DialogTitle>{activeAsset?.title}</DialogTitle>
           </DialogHeader>
-          {activeAsset?.previewUrl && (
-            <div className="relative aspect-[16/9] overflow-hidden rounded-xl border border-border bg-muted">
-              <Image
-                src={activeAsset.previewUrl}
-                alt={activeAsset.title}
-                fill
-                className="object-cover"
-              />
+          {activeAsset?.previewUrl ? (
+            <div className="rounded-xl border border-dashed border-border bg-muted/50 px-4 py-8 text-center text-sm text-muted-foreground">
+              Image previews are not shown on this site.
             </div>
-          )}
+          ) : null}
           <p className="text-sm text-muted-foreground">{activeAsset?.description}</p>
           <DialogFooter>
             <Button variant="outline" onClick={() => setActiveAssetId(null)}>

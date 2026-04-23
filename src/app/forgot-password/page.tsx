@@ -33,11 +33,11 @@ export default function ForgotPasswordPage() {
         className="w-full max-w-md"
       >
         <Link
-          href="/login"
+          href="/"
           className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground mb-8"
         >
           <ArrowLeft className="h-4 w-4" />
-          Back to login
+          Back to home
         </Link>
 
         {!isSubmitted ? (
@@ -87,7 +87,7 @@ export default function ForgotPasswordPage() {
               We've sent a password reset link to <strong>{email}</strong>
             </p>
             <Button asChild variant="outline" className="w-full">
-              <Link href="/login">Back to login</Link>
+              <Link href="/">Back to home</Link>
             </Button>
             <p className="mt-6 text-sm text-muted-foreground">
               Didn't receive the email?{" "}

@@ -4,25 +4,32 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.985 0 0);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.15 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.22 0.02 255);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.22 0.02 255);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.5 0 0);
-  --accent: oklch(0.94 0.02 255);
-  --accent-foreground: oklch(0.22 0.02 255);
+  /* Brand tokens — article distribution landing */
+  --brand-burgundy: #4a0e0e;
+  --brand-burgundy-deep: #3a0b0b;
+  --brand-cream: #f9f7f2;
+  --brand-cta: #e0004d;
+  --brand-charcoal: #1f1a1a;
+
+  --background: #f9f7f2;
+  --foreground: #1f1a1a;
+  --card: #ffffff;
+  --card-foreground: #1f1a1a;
+  --popover: #ffffff;
+  --popover-foreground: #1f1a1a;
+  --primary: #e0004d;
+  --primary-foreground: #ffffff;
+  --secondary: #f0ebe3;
+  --secondary-foreground: #1f1a1a;
+  --muted: #efe9e0;
+  --muted-foreground: #5c534c;
+  --accent: #f5e8e8;
+  --accent-foreground: #4a0e0e;
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: #e8e0d6;
+  --input: #e8e0d6;
+  --ring: #e0004d;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);

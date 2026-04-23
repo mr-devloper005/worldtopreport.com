@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import {
@@ -48,24 +47,11 @@ export function ArticleCard({ article, featured = false }: { article: Article; f
         <Card className={cn(
           'group overflow-hidden border-border bg-card transition-all hover:border-muted-foreground/20'
         )}>
-          <div className={cn(
-            'relative overflow-hidden bg-muted',
-            featured ? 'aspect-[16/9] sm:aspect-[2/1]' : 'aspect-video'
-          )}>
-            <Image
-              src={article.coverImage || '/placeholder.svg?height=720&width=1280'}
-              alt={article.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            {article.isFeatured && (
-              <Badge className="absolute left-3 top-3 bg-accent text-accent-foreground">
-                Featured
-              </Badge>
-            )}
-          </div>
           <CardContent className={cn('p-5', featured && 'sm:p-7')}>
-            <div className="mb-3 flex items-center gap-2">
+            <div className="mb-3 flex flex-wrap items-center gap-2">
+              {article.isFeatured ? (
+                <Badge className="bg-accent text-accent-foreground">Featured</Badge>
+              ) : null}
               <Badge variant="secondary" className="text-xs">
                 {article.category}
               </Badge>
@@ -134,49 +120,43 @@ export function ListingCard({ listing }: { listing: Listing }) {
     >
       <Link href={`/listings/${listing.slug}`}>
         <Card className="group overflow-hidden border-border bg-card transition-all hover:border-muted-foreground/20">
-          <div className="relative aspect-[4/3] overflow-hidden">
-            <Image
-              src={listing.images[0]}
-              alt={listing.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            {listing.isFeatured && (
-              <Badge className="absolute left-3 top-3 bg-accent text-accent-foreground">
-                Featured
-              </Badge>
-            )}
-            <Button
-              variant="secondary"
-              size="icon"
-              className="absolute right-3 top-3 h-8 w-8 rounded-full opacity-0 transition-opacity group-hover:opacity-100"
-              onClick={(e) => {
-                e.preventDefault()
-                const next = !isSaved
-                const nextIds = next
-                  ? Array.from(new Set([...savedIds, listing.id]))
-                  : savedIds.filter((id) => id !== listing.id)
-                setSavedIds(nextIds)
-                saveToStorage(storageKeys.listingSaves, nextIds)
-                setIsSaved(next)
-                toast({
-                  title: next ? 'Listing saved' : 'Listing removed',
-                  description: next ? 'Added to your saved listings.' : 'Removed from saved listings.',
-                })
-              }}
-            >
-              <Bookmark className={cn('h-4 w-4', isSaved && 'fill-current')} />
-            </Button>
-          </div>
           <CardContent className="p-4">
-            <div className="mb-2 flex items-center justify-between">
-              <Badge variant="secondary" className="text-xs">
-                {listing.category}
-              </Badge>
-              <div className="flex items-center gap-1">
-                <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
-                <span className="text-sm font-medium">{listing.rating}</span>
-                <span className="text-xs text-muted-foreground">({listing.reviewsCount})</span>
+            <div className="mb-2 flex flex-wrap items-start justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                {listing.isFeatured ? (
+                  <Badge className="bg-accent text-accent-foreground">Featured</Badge>
+                ) : null}
+                <Badge variant="secondary" className="text-xs">
+                  {listing.category}
+                </Badge>
+              </div>
+              <div className="flex shrink-0 items-center gap-2">
+                <div className="flex items-center gap-1">
+                  <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
+                  <span className="text-sm font-medium">{listing.rating}</span>
+                  <span className="text-xs text-muted-foreground">({listing.reviewsCount})</span>
+                </div>
+                <Button
+                  variant="secondary"
+                  size="icon"
+                  className="h-8 w-8 rounded-full opacity-70 transition-opacity group-hover:opacity-100"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    const next = !isSaved
+                    const nextIds = next
+                      ? Array.from(new Set([...savedIds, listing.id]))
+                      : savedIds.filter((id) => id !== listing.id)
+                    setSavedIds(nextIds)
+                    saveToStorage(storageKeys.listingSaves, nextIds)
+                    setIsSaved(next)
+                    toast({
+                      title: next ? 'Listing saved' : 'Listing removed',
+                      description: next ? 'Added to your saved listings.' : 'Removed from saved listings.',
+                    })
+                  }}
+                >
+                  <Bookmark className={cn('h-4 w-4', isSaved && 'fill-current')} />
+                </Button>
               </div>
             </div>
             <h3 className="mb-1 font-semibold text-foreground">
@@ -236,30 +216,22 @@ export function ClassifiedAdCard({ ad }: { ad: ClassifiedAd }) {
     >
       <Link href={`/classifieds/${ad.slug}`}>
         <Card className="group overflow-hidden border-border bg-card transition-all hover:border-muted-foreground/20">
-          <div className="relative aspect-square overflow-hidden">
-            <Image
-              src={ad.images[0]}
-              alt={ad.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-            />
-            {ad.isFeatured && (
-              <Badge className="absolute left-3 top-3 bg-accent text-accent-foreground">
-                Featured
-              </Badge>
-            )}
-            <Badge className={cn('absolute right-3 top-3', conditionColors[ad.condition])}>
-              {ad.condition.charAt(0).toUpperCase() + ad.condition.slice(1).replace('-', ' ')}
-            </Badge>
-          </div>
           <CardContent className="p-4">
-            <div className="mb-2 flex items-center gap-2">
-              <Badge variant="secondary" className="text-xs">
-                {ad.category}
+            <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                {ad.isFeatured ? (
+                  <Badge className="bg-accent text-accent-foreground">Featured</Badge>
+                ) : null}
+                <Badge variant="secondary" className="text-xs">
+                  {ad.category}
+                </Badge>
+                {ad.isNegotiable ? (
+                  <span className="text-xs text-muted-foreground">Negotiable</span>
+                ) : null}
+              </div>
+              <Badge className={cn('shrink-0', conditionColors[ad.condition])}>
+                {ad.condition.charAt(0).toUpperCase() + ad.condition.slice(1).replace('-', ' ')}
               </Badge>
-              {ad.isNegotiable && (
-                <span className="text-xs text-muted-foreground">Negotiable</span>
-              )}
             </div>
             <h3 className="mb-1 line-clamp-2 font-semibold text-foreground">
               {ad.title}

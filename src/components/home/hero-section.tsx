@@ -1,15 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Compass, Search, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ContentImage } from "@/components/shared/content-image";
 import { SITE_CONFIG, type TaskConfig } from "@/lib/site-config";
 import { siteContent } from "@/config/site.content";
 import { SITE_THEME } from "@/config/site.theme";
-
-const FALLBACK_IMAGE = "/placeholder.svg?height=1400&width=2400";
 
 const heroClasses = {
   'search-first': {
@@ -58,40 +54,14 @@ const heroClasses = {
   },
 } as const;
 
-export function HeroSection({ images, tasks }: { images: string[]; tasks: TaskConfig[] }) {
-  const slides = useMemo(() => {
-    const valid = images.filter(Boolean);
-    return valid.length ? valid.slice(0, 4) : [FALLBACK_IMAGE];
-  }, [images]);
-
-  const [activeIndex, setActiveIndex] = useState(0);
+export function HeroSection({ images: _images, tasks }: { images: string[]; tasks: TaskConfig[] }) {
   const primaryTask = tasks.find((task) => task.key === SITE_THEME.home.primaryTask) || tasks[0];
   const featuredTasks = tasks.filter((task) => SITE_THEME.home.featuredTaskKeys.includes(task.key)).slice(0, 3);
   const palette = heroClasses[SITE_THEME.hero.variant];
 
-  useEffect(() => {
-    if (slides.length <= 1) return;
-    const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % slides.length);
-    }, 5000);
-    return () => window.clearInterval(timer);
-  }, [slides]);
-
   return (
     <section className={`relative overflow-hidden ${palette.section}`}>
-      <div className="absolute inset-0">
-        <ContentImage
-          key={slides[activeIndex]}
-          src={slides[activeIndex]}
-          alt={`Featured visual ${activeIndex + 1} from ${SITE_CONFIG.name}`}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover opacity-35"
-          intrinsicWidth={1600}
-          intrinsicHeight={900}
-        />
-      </div>
+      <div className="absolute inset-0 opacity-30 bg-[radial-gradient(ellipse_at_30%_0%,rgba(255,255,255,0.35),transparent_55%)]" aria-hidden />
       <div className={`absolute inset-0 ${palette.overlay}`} />
 
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
@@ -145,17 +115,7 @@ export function HeroSection({ images, tasks }: { images: string[]; tasks: TaskCo
           <div className="space-y-4">
             <div className={`overflow-hidden rounded-[2rem] p-4 sm:p-5 ${palette.card}`}>
               <div className="grid gap-4 sm:grid-cols-2">
-                <div className="relative min-h-[220px] overflow-hidden rounded-[1.5rem] sm:min-h-[280px]">
-                  <ContentImage
-                    src={slides[(activeIndex + 1) % slides.length] || slides[0]}
-                    alt={`Supporting visual from ${SITE_CONFIG.name}`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover"
-                    intrinsicWidth={1000}
-                    intrinsicHeight={1200}
-                  />
-                </div>
+                <div className="min-h-[220px] rounded-[1.5rem] bg-gradient-to-br from-muted/80 to-muted/40 sm:min-h-[280px]" aria-hidden />
                 <div className="flex flex-col justify-between gap-4">
                   {featuredTasks.map((task, index) => (
                     <div key={task.key} className="rounded-[1.4rem] border border-white/10 bg-black/10 p-4">

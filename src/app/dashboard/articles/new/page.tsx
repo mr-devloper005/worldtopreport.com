@@ -295,11 +295,9 @@ export default function NewArticlePage() {
               <Label className="mb-4 block">Cover Image</Label>
               {coverImage ? (
                 <div className="relative aspect-video rounded-lg overflow-hidden bg-muted">
-                  <img
-                    src={coverImage}
-                    alt="Cover"
-                    className="w-full h-full object-cover"
-                  />
+                  <div className="flex h-full w-full flex-col items-center justify-center bg-gradient-to-br from-muted to-muted/70 text-sm text-muted-foreground">
+                    Cover selected (preview hidden)
+                  </div>
                   <Button
                     variant="destructive"
                     size="icon"
