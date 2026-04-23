@@ -2,23 +2,23 @@ import type { TaskKey } from '@/lib/site-config'
 
 export const siteContent = {
   navbar: {
-    tagline: 'Independent news desk',
+    tagline: 'Guest posts & media',
   },
   footer: {
-    tagline: 'Simple publishing for press-style updates',
+    tagline: 'Guest posts & partner media',
   },
   hero: {
     badge: 'Latest updates',
-    title: ['Clear publishing, simple reading, no extra noise.'],
+    title: ['The smartest way to publish', 'and distribute your stories.'],
     description:
-      'A minimal article-style publishing template built for regular updates, announcements, and media distribution posts.',
+      'Editorial tools and syndication-friendly pages for teams that publish articles, announcements, and media updates.',
     primaryCta: {
-      label: 'Browse latest posts',
+      label: 'Browse media',
       href: '/updates',
     },
     secondaryCta: {
-      label: 'Contact us',
-      href: '/contact',
+      label: 'View demo',
+      href: '/#platform',
     },
     searchPlaceholder: 'Search posts',
     focusLabel: 'Latest',
@@ -128,10 +128,10 @@ export const taskIntroCopy: Record<
   comment: { title: 'Comments', paragraphs: ['Commentary and response posts.'], links: [{ label: 'Home', href: '/' }] },
   org: { title: 'Organizations', paragraphs: ['Organization pages and entities.'], links: [{ label: 'Home', href: '/' }] },
   mediaDistribution: {
-    title: 'Latest updates',
+    title: 'Media',
     paragraphs: [
-      'This archive is designed for straightforward publishing: regular updates, announcements, and media-style posts presented in a clean reading format.',
-      'The layout stays simple so visitors can scan headlines quickly, open stories easily, and move through the archive without distraction.',
+      'This catalog lists published guest posts and media-style placements in a clean, reader-first layout.',
+      'Scan headlines quickly, open any card for the full story, and use contact if you would like to pitch new guest content.',
     ],
     links: [
       { label: 'Home', href: '/' },

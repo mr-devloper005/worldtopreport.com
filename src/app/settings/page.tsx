@@ -346,12 +346,7 @@ export default function SettingsPage() {
 
                   <div className="space-y-4">
                     <div className="relative overflow-hidden rounded-xl border border-border">
-                      <div
-                        className="h-32 w-full bg-cover bg-center"
-                        style={{
-                          backgroundImage: `url(${user?.coverImage || "/placeholder.svg?height=320&width=1280"})`,
-                        }}
-                      />
+                      <div className="h-32 w-full bg-gradient-to-r from-muted to-muted/70" />
                     </div>
                     <div className="flex flex-wrap items-center gap-2">
                       <Input

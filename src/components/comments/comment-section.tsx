@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Heart, Reply, Flag, ChevronDown, ChevronUp, Send } from 'lucide-react'
@@ -86,10 +87,10 @@ export function CommentSection({ comments }: CommentSectionProps) {
             </div>
           </div>
         ) : (
-          <div className="text-center py-6">
-            <p className="text-muted-foreground mb-4">Sign in to join the conversation</p>
-            <Button asChild>
-              <a href="/login">Sign In</a>
+          <div className="py-6 text-center">
+            <p className="mb-4 text-muted-foreground">This site publishes guest posts publicly. For feedback or a pitch, reach the team directly.</p>
+            <Button asChild variant="outline">
+              <Link href="/contact">Contact editorial</Link>
             </Button>
           </div>
         )}
